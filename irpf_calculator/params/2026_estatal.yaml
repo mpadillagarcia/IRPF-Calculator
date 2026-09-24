@@ -1,0 +1,121 @@
+anio: 2026
+fuente: "Ley 35/2006 IRPF + Ley Presupuestos Generales del Estado 2026 (BOE) — VERIFICAR antes de presentar"
+
+escala_general_estatal:
+  # tipo aplicable al TRAMO, no a toda la base (progresivo por tramos)
+  tramos:
+    - {desde: 0,        hasta: 12450,   tipo: 0.095}
+    - {desde: 12450,    hasta: 20200,   tipo: 0.12}
+    - {desde: 20200,    hasta: 35200,   tipo: 0.15}
+    - {desde: 35200,    hasta: 60000,   tipo: 0.185}
+    - {desde: 60000,    hasta: 300000,  tipo: 0.225}
+    - {desde: 300000,   hasta: null,    tipo: 0.235}
+
+escala_ahorro_estatal:
+  tramos:
+    - {desde: 0,        hasta: 6000,    tipo: 0.095}
+    - {desde: 6000,     hasta: 50000,   tipo: 0.105}
+    - {desde: 50000,    hasta: 200000,  tipo: 0.115}
+    - {desde: 200000,   hasta: 300000,  tipo: 0.135}
+    - {desde: 300000,   hasta: null,    tipo: 0.145}
+  # nota: la escala del ahorro estatal + autonómica es IGUAL en todas las CCAA
+  # (a diferencia de la general). Autonómica del ahorro replica estos mismos tramos.
+
+minimo_personal:
+  general: 5550
+  mayor_65: 6700          # incremento sobre el general (total 6700, no +6700 sobre 5550... VERIFICAR redacción exacta AEAT)
+  mayor_75: 8100           # total, sustituye al de 65 si aplica
+
+minimo_descendientes:
+  primero: 2400
+  segundo: 2700
+  tercero: 4000
+  cuarto_y_siguientes: 4500
+  incremento_menor_3_anios: 2800   # adicional, se suma al que corresponda por orden
+  # requisito: convivencia, rentas del descendiente < 8000€/año, menor de 25 (o discapacidad sin límite edad)
+
+minimo_ascendientes:
+  por_ascendiente: 1150
+  incremento_mayor_75: 1400        # adicional sobre el de 1150
+  # requisito: convivencia >6 meses, rentas del ascendiente < 8000€/año (o 1.5*IPREM si es unidad familiar)
+
+minimo_discapacidad:
+  # aplica tanto a contribuyente como a descendientes/ascendientes con discapacidad
+  grado_33_65: 3000
+  grado_65_mas: 9000
+  incremento_movilidad_reducida_o_65mas: 3000   # adicional (gastos asistencia)
+
+reduccion_rendimientos_trabajo:
+  # reducción sobre rendimiento neto del trabajo (post gastos), decreciente con la renta
+  # simplificación del tramo vigente 2026 — VERIFICAR importes exactos actualizados
+  rendimiento_neto_hasta: 19747.5
+  reduccion_maxima: 7302
+  formula: "6498 - 1.14*(RNT - 14852) para RNT entre 14852 y 19747.5; 6498 fijo si RNT<=14852; 0 si RNT>19747.5"
+
+gastos_deducibles_trabajo:
+  general: 2000
+  incremento_desempleo_movilidad_geografica: 2000
+  incremento_discapacidad_33_65: 3500
+  incremento_discapacidad_65_mas_o_movilidad: 7750
+
+reduccion_capital_inmobiliario_alquiler_vivienda_habitual:
+  # régimen post-reforma 2024 (contratos nuevos desde 26/05/2025) vs. transitorio (anteriores)
+  general_nuevo: 0.50
+  zona_tensionada_bajada_precio: 0.90
+  zona_tensionada_joven_18_35: 0.70
+  vivienda_rehabilitada_2_anios_previos: 0.60
+  contrato_anterior_26_05_2025: 0.60   # régimen transitorio, requisitos específicos — VERIFICAR
+
+imputacion_rentas_inmobiliarias:
+  general: 0.02              # 2% valor catastral
+  catastro_revisado_ultimos_10_anios: 0.011   # 1,1% si valor catastral revisado desde 1994
+
+deduccion_generica_estimacion_directa_simplificada:
+  porcentaje: 0.07
+  tope_anual: 2000
+
+reduccion_capital_mobiliario_seguros_rentas_vitalicias:
+  # % NO sujeto a tributación según edad en el momento de constitución de la renta
+  menor_40: 0.60
+  entre_40_49: 0.50
+  entre_50_59: 0.40
+  entre_60_65: 0.25
+  entre_66_69: 0.20
+  mayor_70: 0.08
+
+exencion_venta_vivienda_habitual_mayor_65: true
+exencion_venta_cualquier_bien_reinversion_renta_vitalicia:
+  aplica_mayor_65: true
+  tope_reinversion: 240000
+  plazo_reinversion_meses: 6
+
+deducciones_estatales:
+  vivienda_habitual_regimen_transitorio:
+    aplica_solo_si: "adquirida antes de 01/01/2013 y viene deduciendo desde antes"
+    porcentaje: 0.15
+    base_maxima_anual: 9040
+  maternidad:
+    importe_anual: 1200
+    incremento_guarderia_menor_3: 1000
+    requisito: "madre trabajadora, hijo menor de 3 años"
+  familia_numerosa_general:
+    importe_anual: 1200
+  familia_numerosa_especial:
+    importe_anual: 2400
+  discapacidad_descendiente_o_ascendiente:
+    importe_anual: 1200
+  discapacidad_conyuge:
+    importe_anual: 1200
+  donativos:
+    tramo_1_hasta_150: 0.80
+    tramo_2_resto: 0.40
+    tramo_2_resto_recurrente_3anios: 0.45   # si se dona a la misma entidad 3 años seguidos, importe igual o superior
+
+declaracion_conjunta:
+  reduccion_base_imponible: 3400        # unidad familiar biparental
+  reduccion_base_imponible_monoparental: 2150
+
+limite_obligacion_declarar:
+  un_pagador: 22000
+  varios_pagadores_2o_supera_1500: 15876   # cifra orientativa 2026, VERIFICAR (sube progresivamente cada año)
+  capital_mobiliario_ganancias_conjunto: 1600

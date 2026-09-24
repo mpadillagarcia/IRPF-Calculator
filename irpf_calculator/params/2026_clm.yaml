@@ -1,0 +1,68 @@
+anio: 2026
+ccaa: "Castilla-La Mancha"
+fuente: "Ley 8/2013 de 21/11 + Ley 1/2026 de 26/03 de Medidas Administrativas y Tributarias — VERIFICAR consolidado antes de presentar"
+
+escala_general_autonomica:
+  tramos:
+    - {desde: 0,      hasta: 12450,  tipo: 0.095}
+    - {desde: 12450,  hasta: 20200,  tipo: 0.12}
+    - {desde: 20200,  hasta: 35200,  tipo: 0.15}
+    - {desde: 35200,  hasta: 60000,  tipo: 0.185}
+    - {desde: 60000,  hasta: null,   tipo: 0.225}
+
+escala_ahorro_autonomica:
+  # replica la estatal del ahorro (igual en todas las CCAA)
+  tramos:
+    - {desde: 0,      hasta: 6000,    tipo: 0.095}
+    - {desde: 6000,   hasta: 50000,   tipo: 0.105}
+    - {desde: 50000,  hasta: 200000,  tipo: 0.115}
+    - {desde: 200000, hasta: 300000,  tipo: 0.135}
+    - {desde: 300000, hasta: null,    tipo: 0.145}
+
+deducciones_autonomicas:
+  nacimiento_adopcion:
+    un_hijo: 100
+    dos_hijos: 500
+    tres_hijos: 900
+
+  familia_numerosa:
+    general: 200
+    especial: 400
+    incremento_discapacidad_65_general: 300
+    incremento_discapacidad_65_especial: 900
+
+  por_descendiente_declaracion_conjunta:
+    tramos:
+      - {base_imponible_hasta: 12000, limite_por_hijo: 100}
+      - {base_imponible_hasta: 20000, limite_por_hijo: 50}
+      - {base_imponible_hasta: 25000, limite_por_hijo: 37.5}
+
+  por_descendiente_declaracion_individual:
+    tramos:
+      - {base_imponible_hasta: 6500,  limite_por_hijo: 50}
+      - {base_imponible_hasta: 20000, limite_por_hijo: 37.5}
+      - {base_imponible_hasta: 25000, limite_por_hijo: 25}
+
+  alquiler_vivienda_habitual:
+    porcentaje: 0.15
+    tope_general: 450
+    tope_colectivos_especiales: 500   # menores 36, familia numerosa, monoparental, discapacidad>=65%, dacion pago (Ley 1/2026)
+    colectivos_tope_especial: ["menor_36", "familia_numerosa", "monoparental", "discapacidad_65_mas", "dacion_pago"]
+
+  discapacidad:
+    # VERIFICAR importes exactos vigentes — CLM tiene deducción propia por gastos de discapacidad
+    pendiente_verificar: true
+
+  ascendientes_mayores_75_o_discapacidad:
+    # VERIFICAR importe exacto vigente
+    pendiente_verificar: true
+
+  gastos_guarderia_centros_infantiles:
+    # VERIFICAR importe/porcentaje exacto vigente
+    pendiente_verificar: true
+
+nota_cobertura: >
+  Existen 21 deducciones autonómicas en CLM según fuentes de 2026; este fichero cubre
+  las de mayor probabilidad de aplicar (nacimiento, familia numerosa, descendientes,
+  alquiler). Las marcadas pendiente_verificar deben completarse contra el texto
+  consolidado de la Ley 8/2013 y modificaciones antes de usar en un caso real.
